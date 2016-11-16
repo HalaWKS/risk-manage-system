@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectTable extends Migration
+class CreatePlancontentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateProjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->increments('id');       //项目ID
-            $table->string('name');         //项目名
-            $table->string('description');  //项目描述
+        Schema::create('plancontent', function (Blueprint $table) {
+            $table->increments('id');       //计划内容ID
+            $table->string('r_id');         //风险ID
+            $table->string('plan_id');      //计划ID
             $table->timestamps();
         });
     }
