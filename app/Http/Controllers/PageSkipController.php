@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Risk;
-use App\RiskManagePlan;
-use App\PlanContent;
-use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ProjectController extends Controller
+/**
+ * Class PageSkipController
+ * @package App\Http\Controllers
+ * @creator WKS
+ */
+class PageSkipController extends Controller
 {
 
-    public function createProject(Request $request){
-        $index['name'] = $request['name'];
-        $index['description'] = $request['description'];
-        Project::create($index);
+    public function toCreateProject(){
+        return view('ProjectManage.createProject');
     }
+
+
     /**
      * Display a listing of the resource.
      *

@@ -23,7 +23,16 @@
                     <ul class="nav navbar-nav">
                         <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
                                     href="{{url("/home")}}">风险列表</a></li>
-                        <li class="active" style="font-family: 微软雅黑; font-size: small;"><a href="{{url("/create")}}">提交风险</a></li>
+                        @if( Auth::user()->type == 'developer' )
+                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                                        href="#">我的跟踪</a></li>
+                        @endif
+                        @if( Auth::user()->type == 'pm' )
+                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                                        href="{{url("/createrisk")}}">创建风险</a></li>
+                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                                        href="{{url("/createproject")}}">创建项目</a></li>
+                        @endif
                         <li class="dropdown" style="font-family: 微软雅黑; font-size: small;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们<b class="caret"></b></a>
                             <ul class="dropdown-menu">
