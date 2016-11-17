@@ -3,3 +3,6 @@
 Homestead.yaml
 Homestead.json
 .env
+.idea/encodings.xml
+.idea/workspace.xml
+config/database.php
