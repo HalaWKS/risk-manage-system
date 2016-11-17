@@ -31,7 +31,7 @@ Route::get('/create', 'RiskManageController@createRiskPage');
 
 Route::post('/create', 'RiskManageController@createRisk');
 
-
+Route::get('/createpm', 'ProjectManagerController@createPM');
 
 //Route::get('/', 'SitesController@index');
 //
