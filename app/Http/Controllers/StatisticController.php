@@ -129,4 +129,60 @@ class StatisticController extends Controller
     {
         //
     }
+
+    // created by whj
+    // draw bar chart for data in a time
+    // risks will be grouped by their type and count the number of each type
+    // and show the number of risks become problems
+    public function show_bar_chart(Request $request)
+    {
+        // data table info
+        /*
+         * type, number, be_problem_num
+         */
+        $input = $request->all();
+//        var $begin_time = $input['begin_time'];
+//        var $end_time = $input['end_time'];
+//        var $select_str = "select id, type from riskmanage.risk_type";
+//        $types = DB::select($select_str);
+        $types = [['id'=>1, 'type'=>'type1'], ['id'=>2, 'type'=>'type2'], ['id'=>3, 'type'=>'type3']];
+//        $without_problem = DB::select($select_str);
+        $without_problem = [['id'=>1, 'num'=>100], ['id'=>2, 'num'=>120]];
+//        $select_str = "";
+        //$with_problem = DB::select($select_str);
+        $with_problem = [['id'=>1, 'num'=>50], ['id'=>2, 'num'=>60]];
+        $result = [];
+        foreach($types as $type)
+        {
+            $temp['type'] = $type['type'];
+            $temp['all'] = 0;
+            $temp['problem'] = 0;
+            foreach($without_problem as $wop)
+            {
+                if($type['id'] == $wop['id'])
+                {
+                    $temp['all'] = $wop['num'];
+                    break;
+                }
+            }
+            foreach($with_problem as $wp)
+            {
+                if($type['id'] == $wop['id'])
+                {
+                    $temp['problem'] = $wp['num'];
+                    break;
+                }
+            }
+            array_push($result, $temp);
+        }
+        return view('statistics.statisticDisplay', compact('result'));
+    }
+
+    // created by whj
+    // draw pie chart for data in a time
+    //
+    public function show_pie_chart(Request $request)
+    {
+
+    }
 }
