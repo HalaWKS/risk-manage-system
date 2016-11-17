@@ -28,7 +28,7 @@ class RiskManageController extends Controller
 
     public function createRiskPage(){
 
-        $selectProjects = 'select * from projects';
+        $selectProjects = 'select * from project';
         $projects = DB::select($selectProjects);
 
         return view('RiskManage.createRisk', compact('projects'));
