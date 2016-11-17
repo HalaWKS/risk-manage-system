@@ -7,6 +7,7 @@ use App\Http\Requests;
 use DB;
 use App\User;
 
+
 class ProjectManagerController extends Controller
 {
 
