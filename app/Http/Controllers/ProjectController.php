@@ -17,6 +17,7 @@ class ProjectController extends Controller
         $index['name'] = $request['name'];
         $index['description'] = $request['description'];
         Project::create($index);
+        return redirect('/createproject');
     }
     /**
      * Display a listing of the resource.
