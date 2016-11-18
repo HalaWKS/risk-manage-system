@@ -41,6 +41,8 @@ Route::get('/createproject', 'PageSkipController@toCreateProject');
 
 Route::post('/createproject', 'ProjectController@createProject');
 
+Route::get('/myrisk', 'PageSkipController@toMyRisk');
+
 
 //web homework
 //Route::get('/login', 'LoginController@getLogin');

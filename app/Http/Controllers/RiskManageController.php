@@ -19,6 +19,7 @@ class RiskManageController extends Controller
 
         $input = $request->all();
         $input['creator_id'] = Auth::user()->id;
+        $input['condition'] = 'potential';
         //存入数据库
         Risk::create($input);
         //重定向

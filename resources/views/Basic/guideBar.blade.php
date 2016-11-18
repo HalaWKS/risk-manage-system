@@ -25,7 +25,7 @@
                                     href="{{url("/home")}}">风险列表</a></li>
                         @if( Auth::user()->type == 'developer' )
                             <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
-                                        href="#">我的跟踪</a></li>
+                                        href="{{url("/myrisk")}}">我的跟踪</a></li>
                         @endif
                         @if( Auth::user()->type == 'pm' )
                             <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
