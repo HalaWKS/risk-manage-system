@@ -27,11 +27,15 @@ Route::post('/register', 'RegisterController@postRegister');
 
 Route::get('/home', 'RiskManageController@showAllRisk');
 
-Route::get('/createrisk', 'RiskManageController@createRiskPage');
+Route::get('/createrisk', 'PageSkipController@toCreateRisk');
 
-Route::post('/create', 'RiskManageController@createRisk');
+Route::post('/createrisk', 'RiskManageController@createRisk');
 
 Route::get('/createpm', 'ProjectManagerController@createPM');
+
+Route::get('/createrisktype', 'PageSkipController@toCreateRiskType');
+
+Route::post('/createrisktype', 'RiskManageController@createrisktype');
 
 Route::get('/createproject', 'PageSkipController@toCreateProject');
 

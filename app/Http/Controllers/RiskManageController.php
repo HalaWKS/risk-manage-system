@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Risk;
+use App\RiskType;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -24,6 +25,14 @@ class RiskManageController extends Controller
         //重定向
         return redirect('/home');
 
+    }
+
+    public function createRiskType(Request $request){
+        $input = $request->all();
+
+        RiskType::create($input);
+
+        return redirect('/createrisktype');
     }
 
     public function createRiskPage(){

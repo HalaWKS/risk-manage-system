@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 /**
  * Class PageSkipController
@@ -13,6 +14,18 @@ use App\Http\Controllers\Controller;
  */
 class PageSkipController extends Controller
 {
+
+    public function  toCreateRisk(){
+
+        $selectProjects = 'select * from projects';
+        $projects = DB::select($selectProjects);
+
+        return view('RiskManage.createRisk', compact('projects'));
+    }
+
+    public function toCreateRiskType(){
+        return view('RiskManage.createRiskType');
+    }
 
     public function toCreateProject(){
         return view('ProjectManage.createProject');

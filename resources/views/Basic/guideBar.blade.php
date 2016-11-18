@@ -32,6 +32,8 @@
                                         href="{{url("/createrisk")}}">创建风险</a></li>
                             <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
                                         href="{{url("/createproject")}}">创建项目</a></li>
+                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                                        href="{{url("/createrisktype")}}">添加风险类型</a></li>
                         @endif
                         <li class="dropdown" style="font-family: 微软雅黑; font-size: small;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们<b class="caret"></b></a>

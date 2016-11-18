@@ -3,7 +3,7 @@
 
     {{--添加风险--}}
     <div class="container">
-        {!! Form::open(['url'=>'/create']) !!}
+        {!! Form::open(['url'=>'/createrisk']) !!}
 
         <div class="col-md-6 col-lg-offset-3">
             <div class="panel panel-default">
