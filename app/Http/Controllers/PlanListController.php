@@ -18,8 +18,8 @@ class PlanListController extends Controller
      */
     public function showAllList(){
 
-        $selected='select rmp.id as plan_id,rmp.name as rmp_name,r.p_id as project_id,pr.name as pro_name,r.id as r_id,rt.name as rt_name
- from (plancontent p left join risks r  on r.id = p.r_id)  left join riskmanageplan rmp on rmp.id = p.plan_id join risktypes rt on r.type_id = rt.id join projects pr on pr.id = r.p_id';
+        $selected='select rmp.id as plan_id,rmp.name as rmp_name,r.p_id as project_id,pr.name as pro_name,r.id as r_id,rt.name as rt_name,u.name as tracker_name,r.content as r_content,r.condition as r_condition,r.possibility as r_possibility, r.effect as r_effect,r.trigger as r_trigger
+ from (plancontent p left join risks r  on r.id = p.r_id)  left join riskmanageplan rmp on rmp.id = p.plan_id join risktypes rt on r.type_id = rt.id join projects pr on pr.id = r.p_id left join users u on u.id = r.tracker_id';
         $list = DB::select($selected);
     }
     /**
