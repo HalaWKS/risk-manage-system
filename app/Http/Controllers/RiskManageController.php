@@ -19,11 +19,10 @@ class RiskManageController extends Controller
 
         $input = $request->all();
         $input['creator_id'] = Auth::user()->id;
-        $input['tracker_id'] = null;
         //存入数据库
         Risk::create($input);
         //重定向
-        return redirect('/home');
+        return redirect('/createrisk');
 
     }
 
@@ -37,10 +36,18 @@ class RiskManageController extends Controller
 
     public function createRiskPage(){
 
+
+        $selectDevelopers = 'SELECT * FROM users u where u.type = \'developer\'';
+        $developers = DB::select($selectDevelopers);
+
+        $selectRiskType = 'select * from risktypes';
+        $risktypes = DB::select($selectRiskType);
+
         $selectProjects = 'select * from projects';
         $projects = DB::select($selectProjects);
 
-        return view('RiskManage.createRisk', compact('projects'));
+//        return view('RiskManage.createRisk')->with('projects', $projects)->with('developers', $developers)->with('riskTypes', $risktypes);
+        return view('RiskManage.createRisk', compact('projects', 'risktypes', 'developers'));
     }
 
     /**

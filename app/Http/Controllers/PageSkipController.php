@@ -17,10 +17,16 @@ class PageSkipController extends Controller
 
     public function  toCreateRisk(){
 
+        $selectDevelopers = 'SELECT * FROM users u where u.type = \'developer\'';
+        $developers = DB::select($selectDevelopers);
+
+        $selectRiskType = 'select * from risktypes';
+        $risktypes = DB::select($selectRiskType);
+
         $selectProjects = 'select * from projects';
         $projects = DB::select($selectProjects);
 
-        return view('RiskManage.createRisk', compact('projects'));
+        return view('RiskManage.createRisk', compact('projects', 'risktypes', 'developers'));
     }
 
     public function toCreateRiskType(){

@@ -20,6 +20,24 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('type', '风险类型:') !!}
+                            {{--{!! Form::text('name', null, ['class'=>'form-control']) !!}--}}
+                            <select name = "type_id" class = "form-control" style="width: 150px;">
+                                @foreach( $risktypes as $risktype)
+                                    <option name = "type_id" value="{{ $risktype->id }}">{{ $risktype->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('tracker', '跟踪者:') !!}
+                            {{--{!! Form::text('name', null, ['class'=>'form-control']) !!}--}}
+                            <select name = "tracker_id" class = "form-control" style="width: 150px;">
+                                @foreach( $developers as $developer)
+                                    <option name = "tracker_id" value="{{ $developer->id }}">{{ $developer->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('content', '风险内容:') !!}
                             {!! Form::text('content', null, ['class'=>'form-control']) !!}
                         </div>
