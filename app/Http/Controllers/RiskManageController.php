@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Risk;
+use App\RiskUpdate;
 use App\RiskType;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -25,6 +26,34 @@ class RiskManageController extends Controller
         //重定向
         return redirect('/createrisk');
 
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector 更新风险状态
+     * 更新风险状态
+     */
+    public function updateRiskCondition($id, Request $request)
+    {
+        $input = $request->all();
+        $user_id = Auth::user()->id;
+        $risk_id = $id;
+        $operation = 'update';
+        $condition = $input['condition'];
+        $updateRisk = 'update risks set `condition` = "'.$condition.'" where id = '.$risk_id;
+        DB::update($updateRisk);
+
+        $this->addRiskUpdateRecord($user_id, $risk_id, $operation);
+
+        return redirect('/myrisk');
+    }
+
+    public function addRiskUpdateRecord($riskID, $userID, $operation){
+        $input['r_id'] = $riskID;
+        $input['u_id'] = $userID;
+        $input['content'] = $operation;
+        RiskUpdate::create($input);
     }
 
     public function createRiskType(Request $request){

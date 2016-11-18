@@ -43,6 +43,9 @@ Route::post('/createproject', 'ProjectController@createProject');
 
 Route::get('/myrisk', 'PageSkipController@toMyRisk');
 
+Route::post('/updateriskcondition/{id}', 'RiskManageController@updateRiskCondition');
+
+
 
 //web homework
 //Route::get('/login', 'LoginController@getLogin');

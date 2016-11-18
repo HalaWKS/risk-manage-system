@@ -29,7 +29,7 @@
                         <th>修改状态</th>
                     </tr>
                     @foreach($myrisks as $myrisk)
-                        {{--{!! Form::open(['url'=>'/modifyUser/'.$user->id])!!}--}}
+                        {!! Form::open(['url'=>'/updateriskcondition/'.$myrisk->r_id])!!}
                         <tr>
                             <th>{{ $myrisk->r_id }}</th>  <!--ID-->
                             <th>{{ $myrisk->p_name }}</th>  <!--项目名-->
@@ -63,14 +63,14 @@
                             <th>{{ $myrisk->trigger }}</th> <!--触发器-->
                             <th>{{ $myrisk->updated_at }}</th> <!--更新日期-->
                             <th>    <!--风险状态设置-->
-                                <select name = "condition" class = "form-control" style="width: 150px;">
-                                    <option name = "condition" value="general">潜在</option>
-                                    <option name = "condition" value="doctor">已发生</option>
+                                <select name = "condition" class = "form-control" style="width: 100px;">
+                                    <option name = "condition" value="potential">潜在</option>
+                                    <option name = "condition" value="appeal">已发生</option>
                                 </select>
                             </th>
                             <th>
-                                {{--{!! Form::submit("提交",['class'=>'btn btn-primary form-comtrol', 'style'=>'width: 100px; height: 30px; font-size: 16px; font-weight: bold; font-family: 微软雅黑; font-size: 16px;']) !!}--}}
-                                {{--{!! Form::close() !!}--}}
+                                {!! Form::submit("修改",['class'=>'btn btn-primary form-comtrol', 'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold; font-family: 微软雅黑; font-size: 16px;']) !!}
+                                {!! Form::close() !!}
                             </th>
                         </tr>
                     @endforeach
