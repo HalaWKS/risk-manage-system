@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PageSkipController
@@ -14,6 +15,23 @@ use DB;
  */
 class PageSkipController extends Controller
 {
+
+    public function toMyRisk(){
+        $operatorID = Auth::user()->id;
+//        $selectMyRisks = 'select * from risks r where r.tracker_id = '.$operatorID ;
+        $selectMyRisks = 'select r_id, p_id, p_name, type_id, `name` as type_name, creator_id, tracker_id,
+content, `condition`, possibility, effect, `trigger`, created_at, updated_at from
+(select id as r_id, a.p_id, p_name, type_id, creator_id, tracker_id, content,
+`condition`, possibility, effect, `trigger`, created_at, updated_at from
+(SELECT * FROM riskmanage.risks r where r.tracker_id = '.$operatorID.') a left join
+(select id as p_id, name as p_name from projects) p on a.p_id = p.p_id) b left join
+(select id, `name` from risktypes) rt on b.type_id = rt.id
+order by r_id';
+
+        $myrisks = DB::select($selectMyRisks);
+
+        return view('RiskManage.showMyRisk', compact('myrisks'));
+    }
 
     public function  toCreateRisk(){
 

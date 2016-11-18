@@ -22,7 +22,7 @@ class RiskSortController extends Controller
 
         $input = $request->all();
         $selected = 'select distinct rt.id,rt.name,count(rt.id) as numbers
-                        from risktypes rt left join risks r on r.type_id = rt.id where r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
+                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition<>`appeal` r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
                         group by rt.id order by numbers desc';
         $riskTypes = DB::select($selected);
         return $riskTypes;
@@ -38,7 +38,7 @@ class RiskSortController extends Controller
 //TODO 如果查询条件中含有字符串，如第二行error ,是否需要加单引号？
         $input = $request->all();
         $selected = 'select distinct rt.id,rt.name,count(rt.id) as numbers
-                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition=`error` and r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
+                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition=`appeal` and r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
                         group by rt.id order by numbers desc';
         $riskTypes = DB::select($selected);
         return $riskTypes;

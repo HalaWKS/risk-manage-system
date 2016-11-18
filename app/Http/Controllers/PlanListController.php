@@ -9,49 +9,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class RiskImportController extends Controller
+class PlanListController extends Controller
 {
 
     /**
-     * @param Request $request
-     * 创建风险计划，request只包含计划名称
+     * 返回所有计划列表。
+     * 包含计划Id.计划名、项目Id,项目名，风险id，风险名
      */
-    public function createPlan(Request $request){
-        $input = $request->all();
-        RiskManagePlan::create($input);
+    public function showAllList(){
 
-    }
-
-
-
-    /**
-     * @param Request $request
-     * 批量导入风险
-     * 所涉及的表：风险计划表；计划内容表;风险表；风险更新表;计划内容表
-     * request对应包含信息：计划表id(1个)，风险ID（N个），
-     * 对应name.riskArray
-     */
-
-    public function importRisks(Request $request){
-        $input = $request->all();
-        $plan['plan_id'] = $input['plan_id'];
-        $riskArray = $input['riskArray'];
-//        $selectP = "select p_id from risks where id = '.$riskArray[0].'";
-//        $pid = DB::select($selectP);
-
-//        RiskManagePlan::create($plan);
-        foreach($riskArray as $array){
-            $risk['r_id']=$array['r_id'];
-            $risk['plan_id']=$plan['plan_id'];
-            PlanContent::create($risk);
-        }
-
-//        return
-
-
-
-
-
+        $selected='select rmp.id as plan_id,rmp.name as rmp_name,r.p_id as project_id,pr.name as pro_name,r.id as r_id,rt.name as rt_name,u.name as tracker_name,r.content as r_content,r.condition as r_condition,r.possibility as r_possibility, r.effect as r_effect,r.trigger as r_trigger
+ from (plancontent p left join risks r  on r.id = p.r_id)  left join riskmanageplan rmp on rmp.id = p.plan_id join risktypes rt on r.type_id = rt.id join projects pr on pr.id = r.p_id left join users u on u.id = r.tracker_id';
+        $list = DB::select($selected);
     }
     /**
      * Display a listing of the resource.
