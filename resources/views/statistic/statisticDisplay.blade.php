@@ -36,7 +36,9 @@ $result = $page_info['result'];
     {!! Form::close() !!}
 </div>
 @include('statistic.draw_bar_chart')
+@include('statistic.draw_pie_chart')
 @include('statistic.draw_problem_bar_chart')
+@include('statistic.draw_problem_pie_chart')
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
