@@ -32,7 +32,7 @@ $result = $page_info['result'];
     {!! Form::input('date', 'begin_time', $begin) !!}
     <label> ~ </label>
     {!! Form::input('date', 'end_time' ,  $end) !!}
-    {!! Form::submit('²éÑ¯', ['class'=>'btn btn-primary col-lg-offset-1', 'style'=>'width: 10%', 'name'=>'submit']) !!}
+    {!! Form::submit('æŸ¥è¯¢', ['class'=>'btn btn-primary col-lg-offset-1', 'style'=>'width: 10%', 'name'=>'submit']) !!}
     {!! Form::close() !!}
 </div>
 @include('statistic.draw_bar_chart')

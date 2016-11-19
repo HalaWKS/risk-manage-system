@@ -49,7 +49,11 @@ Route::post('/updaterisktracker/{id}', 'RiskManageController@updateRiskTracker')
 
 Route::get('/createRiskManagePlan', 'PageSkipController@toCreateManagePlan');
 
-Route::post('/createRiskManagePlan', 'RiskManageController@toCreateManagePlan');
+Route::post('/createRiskManagePlan', 'RiskManageController@createManagePlan');
+
+Route::get('/statistic', 'StatisticController@show_bar_chart');
+
+Route::post('/statistic', 'StatisticController@show_bar_chart');
 
 
 

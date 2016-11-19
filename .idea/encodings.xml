@@ -18,6 +18,7 @@
     <file url="file://$PROJECT_DIR$/resources/views/Users" charset="GBK" />
     <file url="file://$PROJECT_DIR$/resources/views/Users/login.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/Users/register.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/statistic/statisticDisplay.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/storage" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tests" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/vendor" charset="UTF-8" />

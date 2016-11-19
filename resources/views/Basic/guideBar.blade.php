@@ -42,6 +42,8 @@
                                 </ul>
                             </li>
                         @endif
+                        <li style="font-family: 微软雅黑; font-size: small;"><a
+                                    href="{{url("/statistic")}}">数据统计</a></li>
 
                     </ul>
                     <form class="navbar-form navbar-left" role="search">

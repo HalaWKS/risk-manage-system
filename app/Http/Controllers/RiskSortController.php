@@ -27,6 +27,8 @@ class RiskSortController extends Controller
 						group by r1.type_id order by count(rt1.id) desc) as sort on r.type_id = sort.id
 							order by num desc,type_name,p_id';
         $result = DB::select($selected);
+
+        return $result;
     }
 
     /**

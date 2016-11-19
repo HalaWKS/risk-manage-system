@@ -18,7 +18,21 @@ class PageSkipController extends Controller
 
     public function toCreateManagePlan()
     {
-        return view('RiskManage.createRiskManagePlan');
+
+//        $riskSortCtrl = new RiskSortController();
+//        $risks = $riskSortCtrl->sortByRecognize();
+        $selected = 'select r.id as r_id,p.id as p_id,cu.id as creator_id,tu.id as tracker_id,r.content,r.condition,r.possibility,r.effect,r.trigger,cu.name as creator_name,tu.name  as tracker_name,p.name as p_name,t.name as type_name,r.created_at,sort.numbers as num from risks r
+		left join projects p on r.p_id=p.id
+			left join users cu on r.creator_id=cu.id
+				left join users tu on r.tracker_id=tu.id
+					left join risktypes t on r.type_id = t.id
+						left join (select rt1.id as id,rt1.name as type_name,count(rt1.id) as numbers
+				from  risks r1 left join risktypes rt1 on r1.type_id = rt1.id
+					where r1.condition=\'potential\'
+						group by r1.type_id order by count(rt1.id) desc) as sort on r.type_id = sort.id
+							order by num desc,type_name,p_id';
+        $risks = DB::select($selected);
+        return view('RiskManage.createRiskManagePlan', compact('risks'));
     }
 
 
@@ -40,7 +54,8 @@ order by r_id';
         return view('RiskManage.showMyRisk', compact('myrisks'));
     }
 
-    public function  toCreateRisk(){
+    public function  toCreateRisk()
+    {
 
         $selectDevelopers = 'SELECT * FROM users u where u.type = \'developer\'';
         $developers = DB::select($selectDevelopers);
@@ -54,7 +69,8 @@ order by r_id';
         return view('RiskManage.createRisk', compact('projects', 'risktypes', 'developers'));
     }
 
-    public function toCreateRiskType(){
+    public function toCreateRiskType()
+    {
 
         $selectRiskType = 'select * from risktypes order by id';
         $risktypes = DB::select($selectRiskType);
@@ -62,12 +78,18 @@ order by r_id';
         return view('RiskManage.createRiskType', compact('risktypes'));
     }
 
-    public function toCreateProject(){
+    public function toCreateProject()
+    {
 
         $selectProjects = 'select * from projects order by id';
         $projects = DB::select($selectProjects);
 
         return view('ProjectManage.createProject', compact('projects'));
+    }
+
+    public function toStatistic()
+    {
+
     }
 
 
