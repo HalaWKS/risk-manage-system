@@ -16,6 +16,27 @@ use Illuminate\Support\Facades\Auth;
 class PageSkipController extends Controller
 {
 
+    public function toAllManagePlan()
+    {
+        $selectManagePlan = 'select * from
+(select plan_id, `name` as plan_name, r_id as risk_id from plancontent pc left join riskmanageplan rmp on pc.plan_id = rmp.id) t1
+left join
+(select r_id, p_id, creator_id, tracker_id, content, `condition`, possibility, effect, `trigger`,
+ creator_name, c.u_name as tracker_name, p.name as p_name, rt.name as type_name, b.created_at from
+(select r.id as r_id, p_id, creator_id, tracker_id, content, possibility, effect,
+`trigger`, created_at, a.u_name as creator_name, type_id, `condition`
+from risks r left join (select u.id as u_id, name as u_name from users u) a on r.creator_id = a.u_id) b left join
+(select u.id as u_id, name as u_name from users u) c on b.tracker_id = c.u_id left join projects p on b.p_id = p.id
+left join risktypes rt on b.type_id = rt.id) t2 on t1.risk_id = t2.r_id
+order by plan_id, risk_id';
+
+        $managePlans = DB::select($selectManagePlan);
+
+        return view('RiskManage.showAllPlan', compact('managePlans'));
+
+    }
+
+
     public function toCreateManagePlan()
     {
 

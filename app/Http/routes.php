@@ -55,6 +55,8 @@ Route::get('/statistic', 'StatisticController@show_bar_chart');
 
 Route::post('/statistic', 'StatisticController@show_bar_chart');
 
+Route::get('/showAllPlan', 'PageSkipController@toAllManagePlan');
+
 
 
 //web homework

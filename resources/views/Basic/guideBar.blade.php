@@ -37,7 +37,7 @@
                             <li class="dropdown" style="font-family: 微软雅黑; font-size: small;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">风险管理计划<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">查看所有计划</a></li>
+                                    <li><a href="{{url("/showAllPlan")}}">查看所有计划</a></li>
                                     <li><a href="{{url("/createRiskManagePlan")}}">新建计划</a></li>
                                 </ul>
                             </li>
