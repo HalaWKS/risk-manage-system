@@ -13,6 +13,7 @@ use DB;
 class RiskManageController extends Controller
 {
 
+
     /**
      * 创建风险
      */
@@ -31,7 +32,7 @@ class RiskManageController extends Controller
     /**
      * @param $id
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector 更新风险状态
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * 更新风险状态
      */
     public function updateRiskCondition($id, Request $request)
@@ -47,6 +48,27 @@ class RiskManageController extends Controller
         $this->addRiskUpdateRecord($user_id, $risk_id, $operation);
 
         return redirect('/myrisk');
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * 更新风险跟踪者
+     */
+    public function updateRiskTracker($id, Request $request)
+    {
+        $input = $request->all();
+        $user_id = Auth::user()->id;
+        $risk_id = $id;
+        $operation = 'update';
+        $tracker_id = $input['tracker_id'];
+        $updateRisk = 'update risks set tracker_id = '.$tracker_id.' where id = '.$risk_id;
+        DB::update($updateRisk);
+
+        $this->addRiskUpdateRecord($user_id, $risk_id, $operation);
+
+        return redirect('/home');
     }
 
     public function addRiskUpdateRecord($riskID, $userID, $operation){
@@ -88,15 +110,21 @@ class RiskManageController extends Controller
 //        $selectRisks = 'select * from risks';
 //        $selectRisks = 'SELECT * FROM riskmanage.risks r left join riskmanage.users u on r.creator_id = u.id';
 //        $risks = DB::select($selectRisks);
-        $selectRisks = 'select r_id, p_id, creator_id, tracker_id, content, possibility, effect, `trigger`, b.created_at, creator_name, c.u_name as tracker_name, p.name as project_name from
-        (select r.id as r_id, p_id, creator_id, tracker_id, content, possibility, effect, `trigger`, created_at, a.u_name as creator_name
+        $selectRisks = 'select r_id, p_id, creator_id, tracker_id, content, `condition`, possibility, effect, `trigger`,
+ creator_name, c.u_name as tracker_name, p.name as p_name, rt.name as type_name, b.created_at from
+(select r.id as r_id, p_id, creator_id, tracker_id, content, possibility, effect,
+`trigger`, created_at, a.u_name as creator_name, type_id, `condition`
 from risks r left join (select u.id as u_id, name as u_name from users u) a on r.creator_id = a.u_id) b left join
-        (select u.id as u_id, name as u_name from users u) c on b.tracker_id = c.u_id left join projects p on b.p_id = p.id
-        order by r_id';
+(select u.id as u_id, name as u_name from users u) c on b.tracker_id = c.u_id left join projects p on b.p_id = p.id
+left join risktypes rt on b.type_id = rt.id
+order by p_id, r_id';
 
         $risks = DB::select($selectRisks);
 
-        return view('RiskManage.showAllRisk', compact('risks'));
+        $selectDevelopers = 'SELECT * FROM users u where u.type = \'developer\'';
+        $developers = DB::select($selectDevelopers);
+
+        return view('RiskManage.showAllRisk', compact('risks', 'developers'));
     }
 
 

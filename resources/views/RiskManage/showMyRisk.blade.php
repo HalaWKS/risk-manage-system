@@ -38,7 +38,7 @@
                             <th>
                                 @if( $myrisk->condition == 'potential' )
                                     潜在
-                                @elseif( $myrisk->condition == 'appeal' )
+                                @elseif( $myrisk->condition == 'appear' )
                                     已发生
                                 @endif
                             </th> <!--风险状态-->
@@ -65,7 +65,7 @@
                             <th>    <!--风险状态设置-->
                                 <select name = "condition" class = "form-control" style="width: 100px;">
                                     <option name = "condition" value="potential">潜在</option>
-                                    <option name = "condition" value="appeal">已发生</option>
+                                    <option name = "condition" value="appear">已发生</option>
                                 </select>
                             </th>
                             <th>

@@ -48,11 +48,19 @@ order by r_id';
     }
 
     public function toCreateRiskType(){
-        return view('RiskManage.createRiskType');
+
+        $selectRiskType = 'select * from risktypes order by id';
+        $risktypes = DB::select($selectRiskType);
+
+        return view('RiskManage.createRiskType', compact('risktypes'));
     }
 
     public function toCreateProject(){
-        return view('ProjectManage.createProject');
+
+        $selectProjects = 'select * from projects order by id';
+        $projects = DB::select($selectProjects);
+
+        return view('ProjectManage.createProject', compact('projects'));
     }
 
 

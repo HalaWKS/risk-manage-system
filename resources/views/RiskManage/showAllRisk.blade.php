@@ -2,63 +2,80 @@
 @section('showAllRisk')
 
         <!--所有风险-->
-<div class="col-lg-7 col-lg-offset-1">
+<div class="col-lg-10 col-lg-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading" style="font-family: 微软雅黑; font-size: medium;">风险列表</div>
         <div class="panel-body">
-            @foreach($risks as $risk)
 
-                {{--{!! Form::open(['url'=>'/reply/'.$request->id]) !!}--}}
+            <div class="panel panel-default">
+                <!-- Table -->
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>项目名</th>
+                        <th>风险类型</th>
+                        <th>风险内容</th>
+                        <th>风险状态</th>
+                        <th>可能性</th>
+                        <th>影响程度</th>
+                        <th>触发器</th>
+                        <th>跟踪者</th>
+                        @if( Auth::user()->type == 'pm' )
+                        <th>更改跟踪者</th>
+                        @endif
+                    </tr>
+                    @foreach($risks as $risk)
+                        {!! Form::open(['url'=>'/updaterisktracker/'.$risk->r_id])!!}
+                        <tr>
+                            <th>{{ $risk->r_id }}</th>  <!--ID-->
+                            <th>{{ $risk->p_name }}</th>  <!--项目名-->
+                            <th>{{ $risk->type_name }}</th>    <!--风险类型-->
+                            <th>{{ $risk->content }}</th> <!--风险内容-->
+                            <th>
+                                @if( $risk->condition == 'potential' )
+                                    潜在
+                                @elseif( $risk->condition == 'appear' )
+                                    已发生
+                                @endif
+                            </th> <!--风险状态-->
+                            <th>
+                                @if( $risk->possibility == 'high' )
+                                    高
+                                @elseif( $risk->possibility == 'medium' )
+                                    中
+                                @else
+                                    低
+                                @endif
+                            </th> <!--可能性-->
+                            <th>
+                                @if( $risk->effect == 'high' )
+                                    高
+                                @elseif( $risk->effect == 'medium' )
+                                    中
+                                @else
+                                    低
+                                @endif
+                            </th> <!--影响程度-->
+                            <th>{{ $risk->trigger }}</th> <!--触发器-->
+                            <th>{{ $risk->tracker_name }}</th> <!--跟踪者-->
+                            @if( Auth::user()->type == 'pm' )
+                            <th>    <!--风险跟踪者设置-->
+                                <select name = "tracker_id" class = "form-control" style="width: 100px;">
+                                    @foreach( $developers as $developer)
+                                        <option name = "tracker_id" value="{{ $developer->id }}">{{ $developer->name }}</option>
+                                    @endforeach
+                                </select>
+                            </th>
+                            <th>
+                                {!! Form::submit("修改",['class'=>'btn btn-primary form-comtrol', 'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold; font-family: 微软雅黑; font-size: 16px;']) !!}
+                                {!! Form::close() !!}
+                            </th>
+                            @endif
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
 
-                <div class="alert alert-info" style="font-family: 微软雅黑; font-size: medium;">
-                    <label style="font-size: medium;">{{ $risk->r_id }}</label>
-                    <br>
-                    <label style="font-size: medium;">{{ $risk->project_name }}</label>
-                    <br>
-                    <label style="font-size: smaller;">———————————————————————————————————————————————</label>
-                    <br>
-                    <label style="font-size: larger;">风险描述：{{ $risk->content }}</label>
-                    <br>
-                    <label style="font-size: smaller;">———————————————————————————————————————————————</label>
-                    <br>
-                    <label style="font-size: larger;">触发临界状态：{{ $risk->trigger }}</label>
-                    <br>
-                    <label style="font-size: smaller;">———————————————————————————————————————————————</label>
-                    <br>
-                    @if( $risk->possibility == 'high' )
-                        <label style="font-size: medium;">可能性：高</label>
-                    @elseif( $risk->possibility == 'medium' )
-                        <label style="font-size: medium;">可能性：中</label>
-                    @else
-                        <label style="font-size: medium;">可能性：低</label>
-                    @endif
-                    <br>
-                    @if( $risk->effect == 'high' )
-                        <label style="font-size: medium;">影响程度：高</label>
-                    @elseif( $risk->effect == 'medium' )
-                        <label style="font-size: medium;">影响程度：中</label>
-                    @else
-                        <label style="font-size: medium;">影响程度：低</label>
-                    @endif
-                    <br>
-                    <label style="font-size: smaller;">———————————————————————————————————————————————</label>
-                    <br>
-                    <label style="font-size: medium;">创建者：{{ $risk->creator_name }}</label>
-                    <br>
-                    @if( $risk->tracker_name == null )
-                        <label style="font-size: medium;">跟踪者：无</label>
-                    @else
-                        <label style="font-size: medium;">跟踪者：{{ $risk->tracker_name }}</label>
-                    @endif
-                    <br>
-                    <label style="font-size: small;">创建时间：{{ $risk->created_at }}</label>
-                    {{--{!! Form::submit('回复', ['class'=>'btn btn-primary form-control', 'style'=>'width: 70px; height: 30px; margin-left: 480px; font-size: 10px; font-weight: normal; font-family: 微软雅黑;']) !!}--}}
-                    <br>
-                </div>
-
-                {{--{!! Form::close() !!}--}}
-
-            @endforeach
         </div>
     </div>
 </div>
