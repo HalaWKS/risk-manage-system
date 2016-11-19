@@ -14,7 +14,7 @@ class CreateRiskmanageplanTable extends Migration
     {
         Schema::create('riskmanageplan', function (Blueprint $table) {
             $table->increments('id');       //管理计划ID
-            $table->string('name');         //管理计划名
+            $table->string('name')->unique();         //管理计划名
             $table->timestamps();
         });
     }

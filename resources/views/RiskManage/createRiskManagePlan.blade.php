@@ -8,6 +8,9 @@
             风险列表
         </div>
 
+        {!! Form::open(['url'=>'/createRiskManagePlan'])!!}
+
+
         <div class="panel-body">
             <div class="panel panel-default">
                 <!-- Table -->
@@ -27,7 +30,7 @@
                     @foreach($risks as $risk)
                         <tr>
                             <th>
-                                <input name="risk_id" type="checkbox" value="{{ $risk->r_id }}">
+                                <input name="risk_id[]" type="checkbox" value="{{ $risk->r_id }}">
                             </th>
                             <th>{{ $risk->r_id }}</th>
                             <!--ID-->
@@ -74,21 +77,24 @@
                 </table>
             </div>
 
+            <div class="form-group">
+                {!! Form::label('name', '计划名称:') !!}
+                {!! Form::text('name', null, ['class'=>'form-control']) !!}
+            </div>
+
+            {!! Form::submit("添加", ['class'=>'btn btn-primary form-comtrol', 'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold; font-family: 微软雅黑; font-size: 16px']) !!}
+            {!! Form::close() !!}
+
         </div>
     </div>
 </div>
 
-    {{--{!! Form::open(['url'=>'/updaterisktracker'])!!}--}}
-    {{--{!! Form::submit("识别最多",['class'=>'btn btn-primary form-comtrol',--}}
-    {{--'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold;--}}
-    {{--font-family: 微软雅黑; font-size: 16px; margin-left: 300px']) !!}--}}
-    {{--{!! Form::close() !!}--}}
+{{--{!! Form::open(['url'=>'/updaterisktracker'])!!}--}}
+{{--{!! Form::submit("识别最多",['class'=>'btn btn-primary form-comtrol',--}}
+{{--'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold;--}}
+{{--font-family: 微软雅黑; font-size: 16px; margin-left: 300px']) !!}--}}
+{{--{!! Form::close() !!}--}}
 
-    {{--{!! Form::open(['url'=>'/updaterisktracker'])!!}--}}
-    {{--{!! Form::submit("",['class'=>'btn btn-primary form-comtrol',--}}
-    {{--'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold;--}}
-    {{--font-family: 微软雅黑; font-size: 16px; margin-left: 300px']) !!}--}}
-    {{--{!! Form::close() !!}--}}
 
 @stop
 
