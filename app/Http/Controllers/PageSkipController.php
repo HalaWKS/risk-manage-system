@@ -16,7 +16,14 @@ use Illuminate\Support\Facades\Auth;
 class PageSkipController extends Controller
 {
 
-    public function toMyRisk(){
+    public function toCreateManagePlan()
+    {
+        return view('RiskManage.createRiskManagePlan');
+    }
+
+
+    public function toMyRisk()
+    {
         $operatorID = Auth::user()->id;
 //        $selectMyRisks = 'select * from risks r where r.tracker_id = '.$operatorID ;
         $selectMyRisks = 'select r_id, p_id, p_name, type_id, `name` as type_name, creator_id, tracker_id,

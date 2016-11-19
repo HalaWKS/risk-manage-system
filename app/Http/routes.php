@@ -47,6 +47,10 @@ Route::post('/updateriskcondition/{id}', 'RiskManageController@updateRiskConditi
 
 Route::post('/updaterisktracker/{id}', 'RiskManageController@updateRiskTracker');
 
+Route::get('/createRiskManagePlan', 'PageSkipController@toCreateManagePlan');
+
+Route::post('/createRiskManagePlan', 'RiskManageController@toCreateManagePlan');
+
 
 
 //web homework
