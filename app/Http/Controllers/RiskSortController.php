@@ -25,8 +25,7 @@ class RiskSortController extends Controller
 				from  risks r1 left join risktypes rt1 on r1.type_id = rt1.id
 					where r1.condition=`potential`
 						group by r1.type_id order by count(rt1.id) desc) as sort on r.type_id = sort.id
-							order by num desc
-							  order by type_name';
+							order by num desc,type_name,p_id';
         $result = DB::select($selected);
     }
 
@@ -43,8 +42,7 @@ class RiskSortController extends Controller
 				from  risks r1 left join risktypes rt1 on r1.type_id = rt1.id
 					where r1.condition=`appear`
 						group by r1.type_id order by count(rt1.id) desc) as sort on r.type_id = sort.id
-							order by num desc
-							  order by type_name';
+							order by num desc,type_name,p_id';
         $result = DB::select($selected);
     }
 
