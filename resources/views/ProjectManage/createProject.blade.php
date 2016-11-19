@@ -30,6 +30,36 @@
         </div>
         {!! Form::close() !!}
 
+                <!--项目列表-->
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-family: 微软雅黑; font-size: medium;">项目列表</div>
+                <div class="panel-body">
+
+                    <div class="panel panel-default">
+                        <!-- Table -->
+                        <table class="table">
+
+                            <tr>
+                                <th>ID</th>
+                                <th>项目名</th>
+                                <th>项目描述</th>
+                            </tr>
+
+                            @foreach($projects as $project)
+                                <tr>
+                                    <th>{{ $project->id }}</th>  <!--ID-->
+                                    <th>{{ $project->name }}</th>  <!--项目名-->
+                                    <th>{{ $project->description }}</th>  <!--项目描述-->
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @stop

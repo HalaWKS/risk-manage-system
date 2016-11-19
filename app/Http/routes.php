@@ -45,6 +45,8 @@ Route::get('/myrisk', 'PageSkipController@toMyRisk');
 
 Route::post('/updateriskcondition/{id}', 'RiskManageController@updateRiskCondition');
 
+Route::post('/updaterisktracker/{id}', 'RiskManageController@updateRiskTracker');
+
 
 
 //web homework
