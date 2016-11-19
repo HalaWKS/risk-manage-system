@@ -21,27 +21,28 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex2-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                        <li style="font-family: 微软雅黑; font-size: small;"><a
                                     href="{{url("/home")}}">风险列表</a></li>
                         @if( Auth::user()->type == 'developer' )
-                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                            <li style="font-family: 微软雅黑; font-size: small;"><a
                                         href="{{url("/myrisk")}}">我的跟踪</a></li>
                         @endif
                         @if( Auth::user()->type == 'pm' )
-                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                            <li style="font-family: 微软雅黑; font-size: small;"><a
                                         href="{{url("/createrisk")}}">创建风险</a></li>
-                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                            <li style="font-family: 微软雅黑; font-size: small;"><a
                                         href="{{url("/createproject")}}">创建项目</a></li>
-                            <li class="active" style="font-family: 微软雅黑; font-size: small;"><a
+                            <li style="font-family: 微软雅黑; font-size: small;"><a
                                         href="{{url("/createrisktype")}}">添加风险类型</a></li>
+                            <li class="dropdown" style="font-family: 微软雅黑; font-size: small;">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">风险管理计划<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">查看所有计划</a></li>
+                                    <li><a href="{{url("/createRiskManagePlan")}}">新建计划</a></li>
+                                </ul>
+                            </li>
                         @endif
-                        <li class="dropdown" style="font-family: 微软雅黑; font-size: small;">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于我们<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">信息</a></li>
-                                <li><a href="#">帮助</a></li>
-                            </ul>
-                        </li>
+
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
