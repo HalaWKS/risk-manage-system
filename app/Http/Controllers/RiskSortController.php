@@ -13,6 +13,41 @@ use DB;
 class RiskSortController extends Controller
 {
     /**
+     * 按被识别风险类别数返回风险信息
+     */
+    public function sortRiskByRecognize(){
+        $selected = 'select r.id as r_id,p.id as p_id,cu.id as creator_id,tu.id as tracker_id,r.content,r.condition,r.possibility,r.effect,r.trigger,cu.name as creator_name,tu.name  as tracker_name,p.name as p_name,sort.type_name as type_name,r.created_at from risks r 
+	left join (select rt1.id as id,rt1.name as type_name,count(rt1.id) as numbers
+				from  risks r1 left join risktypes rt1 on r1.type_id = rt1.id
+				  where r.condition=`potential`
+						group by r1.type_id order by count(rt1.id) desc) as sort on r.type_id = sort.id
+		left join projects p on r.p_id=p.id
+			left join users cu on r.creator_id=cu.id
+				left join users tu on r.tracker_id=tu.id
+					left join risktypes t on r.type_id = t.id
+						order by numbers desc';
+        $result = DB::select($selected);
+    }
+
+    /**
+     * 按演变成问题最多的风险类别数返回风险信息
+     */
+    public function sortRiskByRecognize(){
+        $selected = 'select r.id as r_id,p.id as p_id,cu.id as creator_id,tu.id as tracker_id,r.content,r.condition,r.possibility,r.effect,r.trigger,cu.name as creator_name,tu.name  as tracker_name,p.name as p_name,sort.type_name as type_name,r.created_at from risks r 
+	left join (select rt1.id as id,rt1.name as type_name,count(rt1.id) as numbers
+				from  risks r1 left join risktypes rt1 on r1.type_id = rt1.id
+					  where r.condition=`appear`
+						group by r1.type_id order by count(rt1.id) desc) as sort on r.type_id = sort.id
+		left join projects p on r.p_id=p.id
+			left join users cu on r.creator_id=cu.id
+				left join users tu on r.tracker_id=tu.id
+					left join risktypes t on r.type_id = t.id
+						order by numbers desc';
+        $result = DB::select($selected);
+    }
+
+
+    /**
     *TODO LYC
      * @param Request $request 包含开始时间和结束时间,beginTime,endTime
      * 根据被识别情况（被添加爱数最多的风险类别）排序
@@ -27,6 +62,7 @@ class RiskSortController extends Controller
         $riskTypes = DB::select($selected);
         return $riskTypes;
     }
+
 
     /**
      *TODO LYC
