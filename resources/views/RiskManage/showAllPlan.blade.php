@@ -4,10 +4,10 @@
         <!--所有计划-->
 <div class="col-lg-10 col-lg-offset-1">
 
-    @foreach($managePlans as $managePlan)
+    @foreach($plan_detail as $detail)
     <div class="panel panel-default">
         <div class="panel-heading" style="font-family: 微软雅黑; font-size: medium;">
-            风险列表
+            {{ $detail[0]->plan_name }}
         </div>
 
         <div class="panel-body">
@@ -24,12 +24,9 @@
                         <th>影响程度</th>
                         <th>触发器</th>
                         <th>跟踪者</th>
-                        @if( Auth::user()->type == 'pm' )
-                            <th>更改跟踪者</th>
-                        @endif
+                        <th>创建时间</th>
                     </tr>
-                    @foreach($risks as $risk)
-                        {!! Form::open(['url'=>'/updaterisktracker/'.$risk->r_id])!!}
+                    @foreach($detail as $risk)
                         <tr>
                             <th>{{ $risk->r_id }}</th>
                             <!--ID-->
@@ -71,20 +68,7 @@
                             <!--触发器-->
                             <th>{{ $risk->tracker_name }}</th>
                             <!--跟踪者-->
-                            @if( Auth::user()->type == 'pm' )
-                                <th>    <!--风险跟踪者设置-->
-                                    <select name="tracker_id" class="form-control" style="width: 100px;">
-                                        @foreach( $developers as $developer)
-                                            <option name="tracker_id"
-                                                    value="{{ $developer->id }}">{{ $developer->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </th>
-                                <th>
-                                    {!! Form::submit("修改",['class'=>'btn btn-primary form-comtrol', 'style'=>'width: 80px; height: 30px; font-size: 16px; font-weight: bold; font-family: 微软雅黑; font-size: 16px;']) !!}
-                                    {!! Form::close() !!}
-                                </th>
-                            @endif
+                            <th>{{ $risk->created_at }}</th>
                         </tr>
                     @endforeach
                 </table>
@@ -92,6 +76,7 @@
 
         </div>
     </div>
+    @endforeach
 </div>
 
 @stop

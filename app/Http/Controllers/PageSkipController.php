@@ -32,7 +32,30 @@ order by plan_id, risk_id';
 
         $managePlans = DB::select($selectManagePlan);
 
-        return view('RiskManage.showAllPlan', compact('managePlans'));
+        $plan_detail = null;
+
+        if($managePlans != null){
+            $plan_id_tmp = $managePlans[0]->plan_id;
+            $i = 0;
+
+            foreach($managePlans as $managePlan){
+                $plan_id = $managePlan->plan_id;
+                if($plan_id == $plan_id_tmp){
+                    $plan_detail[$managePlan->plan_name][$i] = $managePlan;
+                    $i += 1;
+                } else {
+                    $plan_id_tmp = $plan_id;
+                    $i = 0;
+                    $plan_detail[$managePlan->plan_name][$i] = $managePlan;
+                    $i += 1;
+                }
+            }
+        }
+
+//        print_r($plan_detail);
+
+
+        return view('RiskManage.showAllPlan', compact('plan_detail'));
 
     }
 
