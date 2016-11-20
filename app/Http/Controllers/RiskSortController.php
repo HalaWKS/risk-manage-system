@@ -49,6 +49,27 @@ class RiskSortController extends Controller
     }
 
 
+    public function sortRiskType(Request $request)
+    {
+        $input = $request->all();
+
+        if($input['sortby'] == 'recognize'){
+            $selectTypes = 'select distinct rt.id,rt.name,count(rt.id) as numbers, rt.created_at as created_at
+                                        from risktypes rt join risks r on r.type_id = rt.id where rt.created_at > \''.$input['begin_time'].'\' and rt.created_at < \''.$input['end_time'].'\'
+                                        group by rt.id
+                                        order by numbers desc';
+            $riskTypes = DB::select($selectTypes);
+        } else {
+            $selectTypes = 'select distinct rt.id,rt.name,count(rt.id) as numbers, rt.created_at as created_at
+                                  from risktypes rt left join risks r on r.type_id = rt.id where r.condition=\'appear\' and rt.created_at > \''.$input['begin_time'].'\' and rt.created_at < \''.$input['end_time'].'\'
+                                   group by rt.id order by numbers desc';
+
+            $riskTypes = DB::select($selectTypes);
+        }
+
+        return view('RiskManage.showAllRiskType', compact('riskTypes'));
+    }
+
     /**
     *TODO LYC
      * @param Request $request 包含开始时间和结束时间,beginTime,endTime
@@ -58,11 +79,18 @@ class RiskSortController extends Controller
     public function sortByRecognize(Request $request){
 
         $input = $request->all();
-        $selected = 'select distinct rt.id,rt.name,count(rt.id) as numbers
-                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition<>`appear` r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
-                        group by rt.id order by numbers desc';
-        $riskTypes = DB::select($selected);
-        return $riskTypes;
+//        $selected = 'select distinct rt.id,rt.name,count(rt.id) as numbers
+//                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition<>`appear` r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
+//                        group by rt.id order by numbers desc';
+//        $riskTypes = DB::select($selected);
+
+        $selectRiskTypesByRecognize = 'select distinct rt.id,rt.name,count(rt.id) as numbers, rt.created_at as created_at
+                                        from risktypes rt join risks r on r.type_id = rt.id
+                                        group by rt.id
+                                        order by numbers desc';
+        $riskTypes = DB::select($selectRiskTypesByRecognize);
+
+        return view('RiskManage.showAllRiskType', compact('riskTypes'));
     }
 
 
@@ -72,14 +100,20 @@ class RiskSortController extends Controller
      * 根据被演变成问题情况情况排序
      * @return 排序好的风险类别数组
      */
-    public function sortByError(Request $request){
+    public function sortByAppear(Request $request){
 //TODO 如果查询条件中含有字符串，如第二行error ,是否需要加单引号？
         $input = $request->all();
-        $selected = 'select distinct rt.id,rt.name,count(rt.id) as numbers
-                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition=`appear` and r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
-                        group by rt.id order by numbers desc';
-        $riskTypes = DB::select($selected);
-        return $riskTypes;
+//        $selected = 'select distinct rt.id,rt.name,count(rt.id) as numbers
+//                        from risktypes rt left join risks r on r.type_id = rt.id where r.condition=`appear` and r.created_at>='.$input['beginTime'].' and r.created_at<='.$input['endTime'].'
+//                        group by rt.id order by numbers desc';
+//        $riskTypes = DB::select($selected);
+
+        $selectRiskTypeByAppear = 'select distinct rt.id,rt.name,count(rt.id) as numbers, rt.created_at as created_at
+                                  from risktypes rt left join risks r on r.type_id = rt.id where r.condition=\'appear\'
+                                   group by rt.id order by numbers desc';
+        $riskTypes = DB::select($selectRiskTypeByAppear);
+
+        return view('RiskManage.showAllRiskType', compact('riskTypes'));
     }
     /**
      * Display a listing of the resource.

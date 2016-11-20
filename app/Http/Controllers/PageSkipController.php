@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Auth;
 class PageSkipController extends Controller
 {
 
+    public function toRiskType()
+    {
+        $selectRiskType = 'select distinct rt.id,rt.name,count(r.id) as numbers, rt.created_at as created_at
+                            from risktypes rt left join risks r on r.type_id = rt.id
+                            group by rt.id';
+        $riskTypes = DB::select($selectRiskType);
+
+        return view('RiskManage.showAllRiskType', compact('riskTypes'));
+    }
+
     public function toAllManagePlan()
     {
         $selectManagePlan = 'select * from

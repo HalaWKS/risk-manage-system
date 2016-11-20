@@ -57,6 +57,14 @@ Route::post('/statistic', 'StatisticController@show_bar_chart');
 
 Route::get('/showAllPlan', 'PageSkipController@toAllManagePlan');
 
+Route::get('/riskType', 'PageSkipController@toRiskType');
+
+Route::post('/sortRiskType', 'RiskSortController@sortRiskType');
+
+Route::post('/recognizeDesc', 'RiskSortController@sortByRecognize');
+
+Route::post('/appearDesc', 'RiskSortController@sortByAppear');
+
 
 
 //web homework

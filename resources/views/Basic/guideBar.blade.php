@@ -43,14 +43,16 @@
                             </li>
                         @endif
                         <li style="font-family: 微软雅黑; font-size: small;"><a
+                                    href="{{url("/riskType")}}">风险类型查看</a></li>
+                        <li style="font-family: 微软雅黑; font-size: small;"><a
                                     href="{{url("/statistic")}}">数据统计</a></li>
 
                     </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="搜索">
-                        </div>
-                    </form>
+                    {{--<form class="navbar-form navbar-left" role="search">--}}
+                        {{--<div class="form-group">--}}
+                            {{--<input type="text" class="form-control" placeholder="搜索">--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
                     <ul class="nav navbar-nav navbar-right">
                         <li style="font-family: 微软雅黑; font-size: small;">
                             <a href="{{url('/logout')}}">注销</a>
